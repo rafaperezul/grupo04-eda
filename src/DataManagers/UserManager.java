@@ -4,7 +4,7 @@
  */
 package DataManagers;
 
-import DataClasses.*;
+import Entidades.UserData;
 import TDA.Simple.*;
 
 /**

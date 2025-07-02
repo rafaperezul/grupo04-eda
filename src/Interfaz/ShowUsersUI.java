@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Screens;
+package Interfaz;
 
-import DataClasses.UserData;
+import Entidades.UserData;
 import DataManagers.UserManager;
 import TDA.Simple.Node;
 import javax.swing.table.DefaultTableModel;
