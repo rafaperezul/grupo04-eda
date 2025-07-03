@@ -18,7 +18,9 @@ public class ExpedienteManager {
         expedientes.addLast(expediente);
     }
     
-    //TODO: implementar busqueda con ABBs
+    public static LinkedList<Expediente> Tramites() {
+        return expedientes;
+    }
     
     public static Expediente buscarPorId(String id) {
         Node<Expediente> ptr = expedientes.L();
@@ -28,7 +30,7 @@ public class ExpedienteManager {
             }
             ptr = ptr.next();
         }
-    return null; // No encontrado
+        return null;
     }
 
 }

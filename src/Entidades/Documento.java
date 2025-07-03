@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import Utilidad.Fecha;
+
 /**
  *
  * @author rafae

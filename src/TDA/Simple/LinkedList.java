@@ -32,6 +32,7 @@ public class LinkedList<T> {
         
         if (L == null) {
             addFirst(value);
+            return; //posible fix
         } 
         else {
             Node ptr = L;

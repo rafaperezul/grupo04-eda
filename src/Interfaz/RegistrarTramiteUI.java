@@ -4,7 +4,9 @@
  */
 package Interfaz;
 
+import Utilidad.Fecha;
 import Entidades.*;
+import DataManagers.*;
 
 /**
  *
@@ -12,14 +14,14 @@ import Entidades.*;
  */
 public class RegistrarTramiteUI extends javax.swing.JFrame {
     
-    public ListaTramites Lista;
+    //public ListaTramites Lista;
 
     /**
      * Creates new form RegistrarTramite
      */
     public RegistrarTramiteUI() {
         initComponents();
-        Lista = new ListaTramites();
+        //Lista = new ListaTramites(); //CADA VEZ QUE SE ABRE LA VENTANA, REINICIA LA LISTA Y SE PIERDEN LOS TRAMITES REGISTRADOS
     }
 
     /**
@@ -138,11 +140,11 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
                                     .addComponent(jComboBox1, 0, 1, Short.MAX_VALUE)
                                     .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(28, 28, 28))
                             .addComponent(jButton2))
                         .addGap(117, 117, 117)
@@ -206,7 +208,7 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -244,14 +246,14 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         String fullName = this.jTextField6.getText();
         String phone = this.jTextField7.getText();
         String email = this.jTextField8.getText();
-        String type = this.jComboBox2.getName(); //para saber si es trabajador de ulima o persona/institucion externa
+        String type = this.jComboBox2.getSelectedItem().toString(); //para saber si es trabajador de ulima o persona/institucion externa
         Interesado Interesado = new Interesado(dni,fullName,phone,email,type);
         
         String id = this.jTextField1.getText();
-        String priority = this.jComboBox1.getName(); 
+        String priority = this.jComboBox1.getSelectedItem().toString(); 
         String subject = this.jTextField2.getText(); // asunto
         String refDocument = this.jTextField3.getText();
-        String dependence = this.jComboBox3.getName();
+        String dependence = this.jComboBox3.getSelectedItem().toString();
         
         
         int dia = Integer.parseInt(this.jTextField9.getText());
@@ -261,7 +263,9 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         
         
         Expediente Tramite = new Expediente(id,priority,Interesado,subject,refDocument,startDate,dependence);
-        Lista.AddTramite(Tramite);
+        //Lista.AddTramite(Tramite);
+        
+        ExpedienteManager.registrarExpediente(Tramite);
         System.out.println("User registered");
         
         

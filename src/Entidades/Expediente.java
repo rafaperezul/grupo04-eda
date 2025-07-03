@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Utilidad.Fecha;
 import TDA.Simple.*;
 
 /**
@@ -12,14 +13,15 @@ import TDA.Simple.*;
  */
 public class Expediente {
     private String id;
-    private String priority; // de 1 a 3
-    private Interesado applicant; // persona que esta haciendo el tramite
-    private String subject; // asunto
+    private String priority;
+    private Interesado applicant;
+    private String subject;
     private String refDocument; //????????
     private Fecha startDate; 
     private Fecha endDate;
     private Fecha ChangeDate;
     private String dependence; //????????
+    private String state;
     
 
     public Expediente(String id, String priority, Interesado applicant, String subject, String refDocument, Fecha startDate, String dependence) {
@@ -30,6 +32,7 @@ public class Expediente {
         this.refDocument = refDocument;
         this.startDate = startDate;
         this.dependence = dependence;
+        this.state = "En proceso";
     }
 
     public String getId() {
@@ -103,8 +106,14 @@ public class Expediente {
     public void setDependence(String dependence) {
         this.dependence = dependence;
     }
-        
-    
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
     
 } 
 

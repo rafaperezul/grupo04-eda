@@ -10,7 +10,7 @@ import TDA.Simple.*;
  *
  * @author rafae
  */
-public class ListaTramites {
+public class ListaTramites { //ESTO LO DEJO ACA PORSIA
     private static LinkedList<Expediente> Lista;
     
     public ListaTramites(){
