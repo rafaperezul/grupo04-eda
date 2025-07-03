@@ -4,6 +4,11 @@
  */
 package Interfaz;
 
+import javax.swing.table.DefaultTableModel;
+import TDA.Simple.*;
+import Entidades.*;
+import DataManagers.*;
+
 /**
  *
  * @author rafae
@@ -13,9 +18,38 @@ public class AlertasUI extends javax.swing.JFrame {
     /**
      * Creates new form AlertasUI
      */
+    
+    
+    
     public AlertasUI() {
         initComponents();
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Asunto");
+        modelo.addColumn("Fecha de inicio");
+        modelo.addColumn("Prioridad");
+        
+        jTable1.setModel(modelo);
+        
+        LinkedList<Expediente> pendientes = ExpedienteManager.expedientesEnProceso();
+        
+        Node<Expediente> ptr = pendientes.L();
+        while (ptr != null) {
+            Expediente e = ptr.item();
+            
+            Object[] fila = {
+                e.getId(), 
+                e.getSubject(),
+                e.getStartDate().toString(),
+                e.getPriority()
+            };
+            modelo.addRow(fila);
+            ptr = ptr.next();
+        }
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,13 +81,13 @@ public class AlertasUI extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID expediente", "Asunto", "Prioridad"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -70,21 +104,21 @@ public class AlertasUI extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(332, 332, 332)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))

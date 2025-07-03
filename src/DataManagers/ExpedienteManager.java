@@ -32,5 +32,19 @@ public class ExpedienteManager {
         }
         return null;
     }
+    
+    public static LinkedList<Expediente> expedientesEnProceso() {
+            LinkedList<Expediente> pendientes = new LinkedList<>();
+            Node<Expediente> ptr = expedientes.L();
+            
+            while (ptr != null) {
+                Expediente e = ptr.item();
+                if (!e.getState().equalsIgnoreCase("Finalizado.")) {
+                    pendientes.addLast(e);
+                }
+                ptr = ptr.next();
+            }
+            return pendientes;
+    }
 
 }

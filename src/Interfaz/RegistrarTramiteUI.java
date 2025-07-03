@@ -282,8 +282,7 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         
         Dependencia depExp = new Dependencia(dependencyName);
         
-        Expediente Tramite = new Expediente(id,priority,Interesado,subject,refDocument,startDate,depExp);
-        //Lista.AddTramite(Tramite);
+        Expediente Tramite = new Expediente(id, priority, Interesado, subject, refDocument, startDate, depExp);
         
         ExpedienteManager.registrarExpediente(Tramite);
         System.out.println("Tramite registrado.");
