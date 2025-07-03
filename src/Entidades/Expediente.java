@@ -17,9 +17,9 @@ public class Expediente {
         private Interesado applicant; // persona que esta haciendo el tramite
         private String subject; // asunto
         private String refDocument;
-        private Fecha startDate; //DEFINIR BIEN SI SE VAN A USAR FECHAS COMO TALES O SIMPLES INTS
+        private Fecha startDate; 
         private Fecha endDate;
-        private LinkedList documents; // los documentos que genera el tramite (Strings)
+        private LinkedList<String> documents; // los documentos que genera el tramite (Strings)
 
         public RecordData(String id, int priority, Interesado applicant, String subject, String refDocument, Fecha startDate, LinkedList documents) {
             this.id = id;

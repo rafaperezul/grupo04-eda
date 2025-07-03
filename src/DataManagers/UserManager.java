@@ -28,4 +28,19 @@ public class UserManager {
     public static void addUser(UserData userData) {
         users.addLast(userData);
     }
+    
+    public static boolean validateCred(String username, String password) {
+        Node<UserData> ptr = users.L();
+        
+        while (ptr != null) {
+            UserData user = ptr.item();
+            
+            if (user.username.equals(username) && user.password.equals(password)) {
+                return true;
+            }
+            
+            ptr = ptr.next();
+        }
+        return false;
+    }
 }
