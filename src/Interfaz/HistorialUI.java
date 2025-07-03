@@ -4,6 +4,11 @@
  */
 package Interfaz;
 
+import Cola.*;
+import javax.swing.table.DefaultTableModel;
+import DataManagers.*;
+import Entidades.*;
+
 /**
  *
  * @author rafae
@@ -13,8 +18,27 @@ public class HistorialUI extends javax.swing.JFrame {
     /**
      * Creates new form HistorialUI
      */
+    
+    private DefaultTableModel Tabla;
+    private Cola cola;
+    private Expediente expediente;
+   
+    
     public HistorialUI() {
         initComponents();
+        cola = new Cola(); 
+        Tabla = new DefaultTableModel();
+        Tabla.addColumn("Id_Expediente");
+        Tabla.addColumn("Asunto");
+        Tabla.addColumn("Prioridad");
+        Tabla.addColumn("Interesado");
+        Tabla.addColumn("Dependencia");
+        Tabla.addColumn("Fecha_Inicio");
+        Tabla.addColumn("Fecha_Fin");
+        Tabla.addColumn("Fecha_Cambio");
+        Tabla.addColumn("Estado");
+        this.jTable1.setModel(Tabla);
+        
         
     }
     
@@ -36,7 +60,8 @@ public class HistorialUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Historial de movimientos");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setText("Datos del Trámite");
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -63,29 +88,23 @@ public class HistorialUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(129, 129, 129))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(160, 160, 160))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 347, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
