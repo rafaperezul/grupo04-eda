@@ -7,6 +7,7 @@ package Interfaz;
 import Entidades.*;
 import DataManagers.*;
 import Utilidad.*;
+import TDA.Simple.*;
 
 /**
  *
@@ -146,11 +147,11 @@ public class FinalizarTramiteUI extends javax.swing.JFrame {
         Expediente expediente = ExpedienteManager.buscarPorId(idExp);
         Fecha fecha = new Fecha(dayExp, monthExp, yearExp);
         
-        //Node<Expediente> ptr = ExpedienteManager.Tramites().L();
-        //while (ptr != null) {
-        //    System.out.println(ptr.item().getId());
-        //    ptr = ptr.next();
-        //}
+        Node<Expediente> ptr = ExpedienteManager.Tramites().L();
+        while (ptr != null) {
+            System.out.println(ptr.item().getId());
+            ptr = ptr.next();
+        }
         
         if (expediente != null) {
             
