@@ -4,6 +4,9 @@
  */
 package Interfaz;
 
+import Entidades.*;
+import DataManagers.*;
+
 /**
  *
  * @author rafae
@@ -104,8 +107,17 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        HistorialUI historial = new HistorialUI();
-        ScreenManager.openNewScreen(this, historial);
+        String idExp = jTextField1.getText();
+                
+        Expediente expediente = ExpedienteManager.buscarPorId(idExp);
+        
+        if (expediente != null) {
+            HistorialUI historial = new HistorialUI();
+            ScreenManager.openNewScreen(this, historial);
+            System.out.println("Visualizando historial.");
+        } else {
+            System.out.println("No se encontro el expediente con ID: " + idExp);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
