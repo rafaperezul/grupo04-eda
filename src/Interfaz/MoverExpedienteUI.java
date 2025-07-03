@@ -8,12 +8,12 @@ package Interfaz;
  *
  * @author rafae
  */
-public class MoverTramiteUI extends javax.swing.JFrame {
+public class MoverExpedienteUI extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistrarMovUI
      */
-    public MoverTramiteUI() {
+    public MoverExpedienteUI() {
         initComponents();
     }
 
@@ -132,21 +132,23 @@ public class MoverTramiteUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MoverTramiteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverExpedienteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MoverTramiteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverExpedienteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MoverTramiteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverExpedienteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MoverTramiteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverExpedienteUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoverTramiteUI().setVisible(true);
+                new MoverExpedienteUI().setVisible(true);
             }
         });
     }

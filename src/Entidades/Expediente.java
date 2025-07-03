@@ -20,11 +20,11 @@ public class Expediente {
     private Fecha startDate; 
     private Fecha endDate;
     private Fecha ChangeDate;
-    private String dependence; //????????
+    private Dependencia dependence; //????????
     private String state;
     
 
-    public Expediente(String id, String priority, Interesado applicant, String subject, String refDocument, Fecha startDate, String dependence) {
+    public Expediente(String id, String priority, Interesado applicant, String subject, String refDocument, Fecha startDate, Dependencia dependence) {
         this.id = id;
         this.priority = priority;
         this.applicant = applicant;
@@ -99,11 +99,11 @@ public class Expediente {
         this.ChangeDate = ChangeDate;
     }
 
-    public String getDependence() {
+    public Dependencia getDependence() {
         return dependence;
     }
 
-    public void setDependence(String dependence) {
+    public void setDependence(Dependencia dependence) {
         this.dependence = dependence;
     }
 
