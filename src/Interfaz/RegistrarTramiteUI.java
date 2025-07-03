@@ -86,6 +86,11 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         jLabel12.setText("E-Mail:");
 
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Volver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -94,16 +99,18 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione prioridad", "Baja", "Media", "Alta" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Media", "Alta" }));
+        jComboBox1.setToolTipText("Seleccione Prioridad");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indicar tipo", "Interno (Ulima)", "Externo" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Interno (Ulima)", "Externo" }));
+        jComboBox2.setToolTipText("Indicar Tipo de Interesado");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Biblioteca", "Secretaria Académica", "Centro de Idiomas" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,7 +162,7 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
                                     .addComponent(jTextField7)
                                     .addComponent(jTextField8)
                                     .addComponent(jComboBox2, 0, 124, Short.MAX_VALUE))))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,6 +263,7 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         Expediente Tramite = new Expediente(id,priority,Interesado,subject,refDocument,startDate,dependence);
         Lista.AddTramite(Tramite);
         System.out.println("User registered");
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
     

@@ -80,7 +80,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -214,6 +214,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
@@ -228,13 +231,13 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Seleccione prioridad"/>
-            <StringItem index="1" value="Baja"/>
-            <StringItem index="2" value="Media"/>
-            <StringItem index="3" value="Alta"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Baja"/>
+            <StringItem index="1" value="Media"/>
+            <StringItem index="2" value="Alta"/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione Prioridad"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
@@ -252,12 +255,12 @@
     <Component class="javax.swing.JComboBox" name="jComboBox2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Indicar tipo"/>
-            <StringItem index="1" value="Interno (Ulima)"/>
-            <StringItem index="2" value="Externo"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Interno (Ulima)"/>
+            <StringItem index="1" value="Externo"/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Indicar Tipo de Interesado"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -266,11 +269,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBox3">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Biblioteca"/>
+            <StringItem index="1" value="Secretaria Acad&#xe9;mica"/>
+            <StringItem index="2" value="Centro de Idiomas"/>
           </StringArray>
         </Property>
       </Properties>

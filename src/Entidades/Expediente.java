@@ -18,7 +18,9 @@ public class Expediente {
     private String refDocument; //????????
     private Fecha startDate; 
     private Fecha endDate;
+    private Fecha ChangeDate;
     private String dependence; //????????
+    
 
     public Expediente(String id, String priority, Interesado applicant, String subject, String refDocument, Fecha startDate, String dependence) {
         this.id = id;
@@ -85,7 +87,24 @@ public class Expediente {
     public void setEndDate(Fecha endDate) {
         this.endDate = endDate;
     }
+
+    public Fecha getChangeDate() {
+        return ChangeDate;
+    }
+
+    public void setChangeDate(Fecha ChangeDate) {
+        this.ChangeDate = ChangeDate;
+    }
+
+    public String getDependence() {
+        return dependence;
+    }
+
+    public void setDependence(String dependence) {
+        this.dependence = dependence;
+    }
         
+    
     
 } 
 
