@@ -6,6 +6,7 @@ package DataManagers;
 
 import TDA.Cola;
 import Entidades.Movimiento;
+import TDA.Simple.*;
 
 /**
  *
@@ -13,8 +14,8 @@ import Entidades.Movimiento;
  */
 public class MovimientoManager {
     private static final int MAX = 50;
-    private static String[] ids = new String[MAX];
-    private static Cola[] colas = new Cola[MAX];
+    private static LinkedList<String> ids = new LinkedList<>();
+    private static LinkedList<Cola> colas = new LinkedList<>(); //seria el historial de movimientos POR expediente
     private static int cantidad = 0;
 
     public static void agregarMovimiento(String idExpediente, Movimiento mov) {
@@ -23,24 +24,51 @@ public class MovimientoManager {
             if (cantidad >= MAX) {
                 return;
             }
-            ids[cantidad] = idExpediente;
-            colas[cantidad] = new Cola();
-            colas[cantidad].encolar(mov);
+            ids.addLast(idExpediente);
+            Cola colaNueva = new Cola();
+            colaNueva.encolar(mov);
+            colas.addLast(colaNueva);
             cantidad++;
         } else {
-            colas[pos].encolar(mov);
+            Cola existente = obtenerColaPorPos(pos);
+            if (existente != null) {
+                existente.encolar(mov);
+            }
         }
     }
 
     public static Cola obtenerHistorial(String idExpediente) {
         int pos = buscarPos(idExpediente);
-        if (pos != -1) return clonarCola(colas[pos]);
+        if (pos != -1) { 
+            Cola original = obtenerColaPorPos(pos);
+            return clonarCola(original);
+        }
         return new Cola();
     }
     
+    private static Cola obtenerColaPorPos(int pos) {
+        Node<Cola> ptr = colas.L();
+        int index = 0;
+        
+        while (ptr != null) {
+            if (index == pos) {
+                return ptr.item();
+            }
+            ptr = ptr.next();
+        }
+        return null;
+    }
+    
     private static int buscarPos(String id) {
-        for (int i = 0; i < cantidad; i++) {
-            if (ids[i].equalsIgnoreCase(id)) return i;
+        Node<String> ptr = ids.L();
+        int index = 0;
+        
+        while (ptr != null) {
+            if (ptr.item().equalsIgnoreCase(id)) {
+                return index;
+            }
+            ptr = ptr.next();
+            index++;
         }
         return -1;
     }

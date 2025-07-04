@@ -45,8 +45,20 @@ public class Fecha implements Comparable<Fecha> {
     
     @Override
     public String toString() {
-        String d = (day < 10 ? "0" + day : "" + day);
-        String m = (month < 10 ? "0" + month : "" + month);
+        String d;
+        if (day < 10) {
+            d = "0" + day;
+        } else {
+            d = String.valueOf(day);
+        }
+        
+        String m;
+        if (month < 10) {
+            m = "0" + month;
+        } else {
+            m = String.valueOf(month);
+        }
+        
         return d + "/" + m + "/" + year;
     }
     
