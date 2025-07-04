@@ -4,8 +4,12 @@
  */
 package Interfaz;
 
+import Cola.Cola;
 import Entidades.*;
 import DataManagers.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -16,8 +20,21 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
     /**
      * Creates new form VerSeguimientoUI
      */
+    private DefaultTableModel Tabla;
+    private Cola cola;
+    public Expediente expediente;
+    
     public VerSeguimientoUI() {
         initComponents();
+        cola = new Cola(); 
+        Tabla = new DefaultTableModel();
+        Tabla.addColumn("Id_Exp.");
+        Tabla.addColumn("Asunto");
+        Tabla.addColumn("DepenOrigen");
+        Tabla.addColumn("DepenDestino");
+        Tabla.addColumn("Fecha_Cambio");
+        this.jTable1.setModel(Tabla);
+        
     }
 
     /**
@@ -34,9 +51,12 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Seguimiento");
 
         jLabel2.setText("ID expediente:");
@@ -55,44 +75,61 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(165, 165, 165))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(12, 12, 12)))))
-                .addContainerGap(105, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(93, 93, 93)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jButton1)
-                .addGap(29, 29, 29)
-                .addComponent(jButton2)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel1)
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,13 +146,16 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         
         String idExp = jTextField1.getText();
                 
-        Expediente expediente = ExpedienteManager.buscarPorId(idExp);
+        expediente = ExpedienteManager.buscarPorId(idExp);
         
         if (expediente != null) {
-            HistorialUI historial = new HistorialUI();
-            ScreenManager.openNewScreen(this, historial);
+            //Mostrar en la tabla
+            CargarDatosCola(expediente); 
+            ActualizarTabla();
+            
             System.out.println("Visualizando historial.");
         } else {
+            JOptionPane.showMessageDialog(null, "No se encontro el expediente con ID: " + idExp);
             System.out.println("No se encontro el expediente con ID: " + idExp);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -154,12 +194,55 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void CargarDatosCola(Expediente exp){
+        
+        //id,asunto,depenorigen,dependestino,fecha
+        if (exp.getDepenPrev()==null) {
+            JOptionPane.showMessageDialog(null, "No se ha hecho ningun cambio de dependencia al tramite");
+            
+            
+        }      
+        if (exp.getDepenPrev()!=null) {
+            cola.encolar(exp.getId());
+            cola.encolar(exp.getSubject());
+            cola.encolar(exp.getDepenPrev().getName());
+            cola.encolar(exp.getDependence().getName());
+            cola.encolar(exp.getChangeDate().toString());    
+        
+        }
+        
+    }    
+    
+    public void ActualizarTabla(){
+        System.out.println("aaa");
+        if (Tabla.getRowCount()!=0) {
+            this.Tabla.removeRow(0);
+        }
+        System.out.println("bbb");
+        
+        String datos[] = new String[6];
+        //
+        System.out.println("ccc");
+        datos[0]=cola.desencolar();
+        datos[1]=cola.desencolar();
+        datos[2]=cola.desencolar();
+        datos[3]=cola.desencolar();
+        datos[4]=cola.desencolar();
+        Tabla.addRow(datos);
+        
+        System.out.println("ddd");
+    }
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

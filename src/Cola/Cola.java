@@ -10,13 +10,13 @@ package Cola;
  */
 public class Cola {
     private static final int MAX_SIZE = 50;
-    private  int[] data;
+    private String[] data;
     private int ini;
     private int fin;
     private int cantidad;
     
     public Cola(){
-        data = new int[MAX_SIZE];
+        data = new String[MAX_SIZE];
         ini =  0;
         fin = -1;
         cantidad = 0;
@@ -30,7 +30,7 @@ public class Cola {
         return cantidad == MAX_SIZE;
     }
     
-    public void encolar(int item){
+    public void encolar(String item){
             if (isFull()){
                 System.out.println("Cola llena.");
                 return;
@@ -40,12 +40,11 @@ public class Cola {
             cantidad++;      
     }
     
-    public int desencolar(){
+    public String desencolar(){
         if (isEmpty()){
-            System.out.println("Cola vacia.");
-            return -1;
+            return "No hay nada que quitar";            
         }
-        int item = data[ini];
+        String item = data[ini];
         ini = (ini + 1) % MAX_SIZE;
         cantidad--;  
         return item;

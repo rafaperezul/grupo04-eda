@@ -21,6 +21,7 @@ public class Expediente {
     private Fecha endDate;
     private Fecha ChangeDate;
     private Dependencia dependence; //????????
+    private Dependencia DepenPrev;
     private String state;
     
 
@@ -114,6 +115,15 @@ public class Expediente {
     public void setState(String state) {
         this.state = state;
     }
+
+    public Dependencia getDepenPrev() {
+        return DepenPrev;
+    }
+
+    public void setDepenPrev(Dependencia DepenPrev) {
+        this.DepenPrev = DepenPrev;
+    }
+    
     
 } 
 

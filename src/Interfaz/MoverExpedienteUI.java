@@ -7,6 +7,8 @@ package Interfaz;
 import Entidades.*;
 import DataManagers.*;
 import Utilidad.*;
+import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -150,10 +152,13 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
         Expediente expediente = ExpedienteManager.buscarPorId(idExp);
         
         if (expediente != null) {
+            expediente.setDepenPrev(expediente.getDependence());
             expediente.setDependence(depDest);
             expediente.setChangeDate(changeDate);
+            JOptionPane.showMessageDialog(null, "Expediente movido correctamente");
             System.out.println("Expediente movido correctamente.");
         } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el expediente con ID: " + idExp);
             System.out.println("No se encontró el expediente con ID: " + idExp);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
