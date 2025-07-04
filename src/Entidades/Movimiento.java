@@ -14,13 +14,11 @@ public class Movimiento {
     private Fecha date;
     private Dependencia fromDep;
     private Dependencia toDep; // departamentos de origen y destino
-    private String observation;
 
-    public Movimiento(Fecha date, Dependencia fromDep, Dependencia toDep, String observation) {
+    public Movimiento(Fecha date, Dependencia fromDep, Dependencia toDep) {
         this.date = date;
         this.fromDep = fromDep;
         this.toDep = toDep;
-        this.observation = observation;
     }
 
     public Fecha getDate() {
@@ -35,10 +33,6 @@ public class Movimiento {
         return toDep;
     }
 
-    public String getObservation() {
-        return observation;
-    }
-
     public void setDate(Fecha date) {
         this.date = date;
     }
@@ -49,9 +43,5 @@ public class Movimiento {
 
     public void setToDep(Dependencia toDep) {
         this.toDep = toDep;
-    }
-
-    public void setObservation(String observation) {
-        this.observation = observation;
     }
 }

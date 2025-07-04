@@ -145,9 +145,9 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String idExp = jTextField1.getText();
-                
-        expediente = ExpedienteManager.buscarPorId(idExp);
         
+        /*
+        expediente = ExpedienteManager.buscarPorId(idExp);
         if (expediente != null) {
             //Mostrar en la tabla
             CargarDatosCola(expediente); 
@@ -156,6 +156,15 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
             System.out.println("Visualizando historial.");
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro el expediente con ID: " + idExp);
+            System.out.println("No se encontro el expediente con ID: " + idExp);
+        }
+        */
+        
+        expediente = ExpedienteManager.buscarPorId(idExp);
+        if (expediente != null) {
+            cargarHistorial(idExp);
+            System.out.println("Visualizando historial.");
+        } else {
             System.out.println("No se encontro el expediente con ID: " + idExp);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -195,6 +204,31 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         });
     }
     
+    public void cargarHistorial(String idExp) {
+        Cola historial = MovimientoManager.obtenerHistorial(idExp);
+        
+        if (historial.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Este expediente no tiene historial de movimientos.");
+            return;
+        }
+        
+        Tabla.setRowCount(0);
+        
+        while (!historial.isEmpty()) {
+            Movimiento mov = historial.desencolar();
+            
+            Object[] fila = {
+                idExp,
+                expediente.getSubject(),
+                mov.getFromDep().getName(),
+                mov.getToDep().getName(),
+                mov.getDate().toString()
+            };
+            
+            Tabla.addRow(fila);
+        }
+    }
+    /*
     public void CargarDatosCola(Expediente exp){
         
         //id,asunto,depenorigen,dependestino,fecha
@@ -212,8 +246,10 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         
         }
         
-    }    
-    
+    }
+    */
+
+    /*
     public void ActualizarTabla(){
         System.out.println("aaa");
         if (Tabla.getRowCount()!=0) {
@@ -233,7 +269,7 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         
         System.out.println("ddd");
     }
-
+    */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

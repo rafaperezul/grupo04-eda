@@ -4,19 +4,21 @@
  */
 package Cola;
 
+import Entidades.Movimiento;
+
 /**
  *
  * @author camil
  */
 public class Cola {
     private static final int MAX_SIZE = 50;
-    private String[] data;
+    private Movimiento[] data;
     private int ini;
     private int fin;
     private int cantidad;
     
     public Cola(){
-        data = new String[MAX_SIZE];
+        data = new Movimiento[MAX_SIZE];
         ini =  0;
         fin = -1;
         cantidad = 0;
@@ -30,38 +32,24 @@ public class Cola {
         return cantidad == MAX_SIZE;
     }
     
-    public void encolar(String item){
+    public void encolar(Movimiento mov){
             if (isFull()){
                 System.out.println("Cola llena.");
                 return;
             }
             fin = (fin + 1) % MAX_SIZE;
-            data[fin] = item;
+            data[fin] = mov;
             cantidad++;      
     }
     
-    public String desencolar(){
+    public Movimiento desencolar(){
         if (isEmpty()){
-            return "No hay nada que quitar";            
+            System.out.println("Cola vacia.");
+            return null;
         }
-        String item = data[ini];
+        Movimiento mov = data[ini];
         ini = (ini + 1) % MAX_SIZE;
         cantidad--;  
-        return item;
+        return mov;
     }
-    
-     public void printCola(){
-        if (isEmpty()){
-            System.out.println("Cola vacia");
-            return;
-        }
-        System.out.println("Cola:");
-        System.out.println("----------------");
-        // TAERA PARA COLA 
-        for (int i=0;i<cantidad;i++){
-            int ind = (ini + i)%MAX_SIZE;
-            System.out.print(data[ind] + " | ");
-        }
-        System.out.println("");
-     }
 }

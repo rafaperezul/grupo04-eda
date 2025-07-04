@@ -152,9 +152,14 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
         Expediente expediente = ExpedienteManager.buscarPorId(idExp);
         
         if (expediente != null) {
-            expediente.setDepenPrev(expediente.getDependence());
+            Dependencia depPrev = expediente.getDependence();
+            expediente.setDepenPrev(depPrev);
             expediente.setDependence(depDest);
             expediente.setChangeDate(changeDate);
+            
+            Movimiento mov = new Movimiento(changeDate, depPrev, depDest);
+            MovimientoManager.agregarMovimiento(idExp, mov);
+            
             JOptionPane.showMessageDialog(null, "Expediente movido correctamente");
             System.out.println("Expediente movido correctamente.");
         } else {
