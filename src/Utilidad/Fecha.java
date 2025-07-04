@@ -8,7 +8,7 @@ package Utilidad;
  *
  * @author rafae
  */
-public class Fecha {
+public class Fecha implements Comparable<Fecha> {
     private int day;
     private int month;
     private int year;
@@ -43,11 +43,21 @@ public class Fecha {
         this.year = year;
     }
     
+    @Override
     public String toString() {
         String d = (day < 10 ? "0" + day : "" + day);
         String m = (month < 10 ? "0" + month : "" + month);
         return d + "/" + m + "/" + year;
     }
     
-    
+    @Override
+    public int compareTo(Fecha other) {
+        if (this.year != other.year) {
+            return Integer.compare(this.year, other.year);
+        }
+        if (this.month != other.month) {
+            return Integer.compare(this.month, other.month);
+        }
+        return Integer.compare(this.day, other.day);
+    }
 }

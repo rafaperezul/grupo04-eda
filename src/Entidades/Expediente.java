@@ -16,11 +16,11 @@ public class Expediente {
     private String priority;
     private Interesado applicant;
     private String subject;
-    private String refDocument; //????????
+    private String refDocument;
     private Fecha startDate; 
     private Fecha endDate;
     private Fecha ChangeDate;
-    private Dependencia dependence; //????????
+    private Dependencia dependence;
     private Dependencia DepenPrev;
     private String state;
     

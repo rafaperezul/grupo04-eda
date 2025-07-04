@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import TDA.Simple.*;
 import Entidades.*;
 import DataManagers.*;
+import TDA.*;
 
 /**
  *
@@ -32,20 +33,21 @@ public class AlertasUI extends javax.swing.JFrame {
         
         jTable1.setModel(modelo);
         
-        LinkedList<Expediente> pendientes = ExpedienteManager.expedientesEnProceso();
+        CircularList<Expediente> pendientes = ExpedienteManager.expedientesEnProcesoOrdenada();
+        Node<Expediente> ptr = pendientes.getL();
         
-        Node<Expediente> ptr = pendientes.L();
-        while (ptr != null) {
-            Expediente e = ptr.item();
-            
-            Object[] fila = {
-                e.getId(), 
-                e.getSubject(),
-                e.getStartDate().toString(),
-                e.getPriority()
-            };
-            modelo.addRow(fila);
-            ptr = ptr.next();
+        if (ptr != null) {
+            do { //es lista circular, debe ocurrir al menos una iteración, entonces se usa do while
+                Expediente e = ptr.item();
+                Object[] fila = {
+                    e.getId(),
+                    e.getSubject(),
+                    e.getStartDate().toString(),
+                    e.getPriority()
+                };
+                modelo.addRow(fila);
+                ptr = ptr.next();
+            } while (ptr != pendientes.getL());
         }
     }
     
@@ -62,7 +64,6 @@ public class AlertasUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -76,8 +77,6 @@ public class AlertasUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Actualizar");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,16 +98,14 @@ public class AlertasUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(jButton1)
-                        .addGap(75, 75, 75)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(332, 332, 332)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(319, 319, 319)
+                        .addComponent(jButton1)))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,9 +116,7 @@ public class AlertasUI extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(jButton1)
                 .addGap(49, 49, 49))
         );
 
@@ -171,7 +166,6 @@ public class AlertasUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

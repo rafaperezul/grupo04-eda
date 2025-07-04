@@ -6,7 +6,7 @@ package Interfaz;
 
 import Entidades.*;
 import DataManagers.*;
-import Utilidad.*;
+import Utilidad.Fecha;
 import TDA.Simple.*;
 
 /**
