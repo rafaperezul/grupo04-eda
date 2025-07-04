@@ -4,8 +4,8 @@
  */
 package DataManagers;
 
+import TDA.Cola;
 import Entidades.Movimiento;
-import Cola.*;
 
 /**
  *
@@ -20,7 +20,9 @@ public class MovimientoManager {
     public static void agregarMovimiento(String idExpediente, Movimiento mov) {
         int pos = buscarPos(idExpediente);
         if (pos == -1) {
-            if (cantidad >= MAX) return;
+            if (cantidad >= MAX) {
+                return;
+            }
             ids[cantidad] = idExpediente;
             colas[cantidad] = new Cola();
             colas[cantidad].encolar(mov);

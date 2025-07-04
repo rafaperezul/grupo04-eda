@@ -9,7 +9,6 @@ import Entidades.*;
 import DataManagers.*;
 
 import javax.swing.JOptionPane;
-import java.text.SimpleDateFormat;
 
 /**
  *
@@ -288,8 +287,16 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         System.out.println("Tramite registrado.");
         JOptionPane.showMessageDialog(null, "Tramite registrado.");
         
-        //prueba
-        System.out.println(Tramite.getDependence());
+        jTextField1.setText("");
+        jTextField10.setText("");
+        jTextField11.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
