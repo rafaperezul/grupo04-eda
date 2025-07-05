@@ -7,6 +7,8 @@ package Interfaz;
 import Utilidad.Fecha;
 import Entidades.*;
 import DataManagers.*;
+import TDA.Simple.LinkedList;
+import TDA.Simple.Node;
 
 import javax.swing.JOptionPane;
 
@@ -246,41 +248,148 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         ScreenManager.goBack(this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public boolean IsDateValid(int dia,int mes,int año){
-    
+    public static boolean IsDateValid(int dia,int mes,int año){
+                    
         if (dia<1 || mes<1 || dia>31 || mes>12) {
             return false;
+        }        
+        
+        int[] diasOfMes = {31,28,31,30,31,30,31,31,30,31,30,31};
+        
+        if ((año % 4 == 0 && año % 100 != 0) || (año % 400 == 0)) {
+            diasOfMes[1] = 29;
+        }
+                 
+        return dia <= diasOfMes[mes - 1];   
+    }
+    
+    private boolean isUnique(String id) {
+        Node<Expediente> ptr = ExpedienteManager.Tramites().L();
+        
+        while (ptr != null) {
+            if (ptr.item().getId().equals(id)) return false;
+            ptr = ptr.next();
         }
         
-        if (mes==2 && dia==29 && año%4==0) {
-            return true;
-        }
         return true;
     }
+    
+    public static boolean EsEntero(String valor) {
+    try {
+        Integer.parseInt(valor);
+        return true;
+    } catch (NumberFormatException e) {
+        return false;
+        }
+    }
+    
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
+        if (this.jTextField1.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el ID");
+            return;
+        }
+        if (this.jTextField2.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Asunto");
+            return;
+        }
+        if (this.jTextField3.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Documento referencia");
+            return;
+        }
+        if (this.jTextField9.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Dia");
+            return;
+        }
+        if (this.jTextField10.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Mes");
+            return;
+        }
+        if (this.jTextField11.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Año");
+            return;
+        }
+        
+        if (this.jTextField5.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el DNI");
+            return;
+        }
+        if (this.jTextField6.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Nombre");
+            return;
+        }
+        if (this.jTextField7.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Telefono");
+            return;
+        }
+        if (this.jTextField8.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Email");
+            return;
+        }
+        
+        
         String dni = this.jTextField5.getText();
+        if (!EsEntero(dni)) {
+            JOptionPane.showMessageDialog(null, "El DNI debe ser de tipo Numeral");
+            return;
+        }
+        
         String fullName = this.jTextField6.getText();
         String phone = this.jTextField7.getText();
+        if (!EsEntero(phone)) {
+            JOptionPane.showMessageDialog(null, "El Telefono debe ser de tipo Numeral");
+            return;
+        }
         String email = this.jTextField8.getText();
         String type = this.jComboBox2.getSelectedItem().toString(); //para saber si es trabajador de ulima o persona/institucion externa
+        
         Interesado Interesado = new Interesado(dni,fullName,phone,email,type);
         
         String id = this.jTextField1.getText();
+        if (!isUnique(id)) {
+            JOptionPane.showMessageDialog(null,"Este ID ya se ha registrado");
+            return;
+        }
+        if (!EsEntero(id)) {
+            JOptionPane.showMessageDialog(null, "El ID debe ser de tipo Numeral");
+            return;
+        }
+        
         String priority = this.jComboBox1.getSelectedItem().toString(); 
         String subject = this.jTextField2.getText(); // asunto
         String refDocument = this.jTextField3.getText();
         String dependencyName = this.jComboBox3.getSelectedItem().toString();
         
+        // Pruebas de fecha
+        String PRdia = this.jTextField9.getText();
+        if (!EsEntero(PRdia)) {
+            JOptionPane.showMessageDialog(null, "El dia solo se registra con Numero");
+            return;
+        }
+        String PRmes = this.jTextField10.getText();
+        if (!EsEntero(PRmes)) {
+            JOptionPane.showMessageDialog(null, "El dia solo se registra con Numero");
+            return;
+        }
+        String PRaño = this.jTextField11.getText();
+        if (!EsEntero(PRaño)) {
+            JOptionPane.showMessageDialog(null, "El dia solo se registra con Numero");
+            return;
+        }
+        
         int dia = Integer.parseInt(this.jTextField9.getText());
         int mes = Integer.parseInt(this.jTextField10.getText());
         int año = Integer.parseInt(this.jTextField11.getText());
+        boolean Fechavalida =  IsDateValid(dia,mes,año);
         Fecha startDate = new Fecha(dia,mes,año);
+        if (!Fechavalida) {
+            JOptionPane.showMessageDialog(null, "La Fecha no es valida");
+            return;
+        }
         
-        Dependencia depExp = new Dependencia(dependencyName);
-        
+        Dependencia depExp = new Dependencia(dependencyName);        
         Expediente Tramite = new Expediente(id, priority, Interesado, subject, refDocument, startDate, depExp);
         
         ExpedienteManager.registrarExpediente(Tramite);

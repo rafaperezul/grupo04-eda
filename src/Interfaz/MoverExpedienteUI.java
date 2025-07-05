@@ -145,17 +145,85 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
         ScreenManager.goBack(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public static boolean EsEntero(String valor) {
+    try {
+        Integer.parseInt(valor);
+        return true;
+    } catch (NumberFormatException e) {
+        return false;
+        }
+    }
+    
+    public static boolean IsDateValid(int dia,int mes,int año){
+                    
+        if (dia<1 || mes<1 || dia>31 || mes>12) {
+            return false;
+        }        
+        
+        int[] diasOfMes = {31,28,31,30,31,30,31,31,30,31,30,31};
+        
+        if ((año % 4 == 0 && año % 100 != 0) || (año % 400 == 0)) {
+            diasOfMes[1] = 29;
+        }
+                 
+        return dia <= diasOfMes[mes - 1];   
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (this.jTextField1.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el ID");
+            return;
+        }
+        if (this.jTextField3.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Dia");
+            return;
+        }
+        if (this.jTextField4.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Mes");
+            return;
+        }
+        if (this.jTextField5.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Registre el Año");
+            return;
+        }
+        
         
         String idExp = jTextField1.getText();
+        if (!EsEntero(idExp)) {
+            JOptionPane.showMessageDialog(null, "El ID debe ser de tipo Numeral");
+            return;
+        }
         String depStr = jComboBox1.getSelectedItem().toString();
+        
+        //Prueba de Fecha
+        String PRdia = jTextField3.getText();
+        if (!EsEntero(PRdia)) {
+            JOptionPane.showMessageDialog(null, "El dia solo se registra con Numero");
+            return;
+        }
+        String PRmes = this.jTextField4.getText();
+        if (!EsEntero(PRmes)) {
+            JOptionPane.showMessageDialog(null, "El mes solo se registra con Numero");
+            return;
+        }
+        String PRaño = this.jTextField5.getText();
+        if (!EsEntero(PRaño)) {
+            JOptionPane.showMessageDialog(null, "El año solo se registra con Numero");
+            return;
+        }
+        
         int day = Integer.parseInt(jTextField3.getText());
         int month = Integer.parseInt(jTextField4.getText());
         int year = Integer.parseInt(jTextField5.getText());
+        boolean FechaValida = IsDateValid(day,month,year);
         
         Dependencia depDest = new Dependencia(depStr);
         Fecha changeDate = new Fecha(day, month, year);
+        if (!FechaValida) {
+            JOptionPane.showMessageDialog(null, "La Fecha no es valida");
+            return;
+        }
         
         Expediente expediente = ExpedienteManager.buscarPorId(idExp);
         
@@ -184,7 +252,7 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -222,6 +290,8 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
