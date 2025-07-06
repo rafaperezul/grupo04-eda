@@ -7,7 +7,8 @@ package Interfaz;
 import Entidades.*;
 import DataManagers.*;
 import Utilidad.Fecha;
-import java.util.Set;
+import TDA.Simple.*;
+        
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,8 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
      */
     public MoverExpedienteUI() {
         initComponents();
+        
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -154,19 +157,44 @@ public class MoverExpedienteUI extends javax.swing.JFrame {
         }
     }
     
-    public static boolean IsDateValid(int dia,int mes,int año){
+    public static boolean IsDateValid(int d, int m, int y){
                     
-        if (dia<1 || mes<1 || dia>31 || mes>12) {
+        if (y < 1 || m < 1 || d > 31 || m >12) {
             return false;
         }        
         
-        int[] diasOfMes = {31,28,31,30,31,30,31,31,30,31,30,31};
+        LinkedList<Integer> diasPorMes = new LinkedList<>();
         
-        if ((año % 4 == 0 && año % 100 != 0) || (año % 400 == 0)) {
-            diasOfMes[1] = 29;
+        diasPorMes.addLast(31); // Enero
+        diasPorMes.addLast(28); // Febrero
+        diasPorMes.addLast(31); // Marzo
+        diasPorMes.addLast(30); // Abril
+        diasPorMes.addLast(31); // Mayo
+        diasPorMes.addLast(30); // Junio
+        diasPorMes.addLast(31); // Julio
+        diasPorMes.addLast(31); // Agosto
+        diasPorMes.addLast(30); // Septiembre
+        diasPorMes.addLast(31); // Octubre
+        diasPorMes.addLast(30); // Noviembre
+        diasPorMes.addLast(31); // Diciembre
+        
+        int maxDia = getValorMes(diasPorMes, m);
+        
+        return d <= maxDia;
+    }
+    
+    private static int getValorMes(LinkedList<Integer> list, int mon) {
+        Node<Integer> ptr = list.L();
+        int count = 1;
+        
+        while (ptr != null) {
+            if (count == mon) {
+                return ptr.item();
+            }
+            ptr = ptr.next();
+            count++;
         }
-                 
-        return dia <= diasOfMes[mes - 1];   
+        return -1; //si es mes invalido
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

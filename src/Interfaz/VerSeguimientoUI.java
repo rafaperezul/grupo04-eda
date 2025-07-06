@@ -35,6 +35,7 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         Tabla.addColumn("Fecha_Cambio");
         this.jTable1.setModel(Tabla);
         
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -166,7 +167,7 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
             cargarHistorial(idExp);
             System.out.println("Visualizando historial.");
         } else {
-            System.out.println("No se encontro el expediente con ID: " + idExp);
+            JOptionPane.showMessageDialog(null, "No se encontró el expediente con ID: " + idExp);
         }
         
         jTextField1.setText("");

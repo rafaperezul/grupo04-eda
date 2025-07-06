@@ -22,6 +22,8 @@ public class FinalizarTramiteUI extends javax.swing.JFrame {
      */
     public FinalizarTramiteUI() {
         initComponents();
+        
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -11,6 +11,7 @@ import TDA.Simple.LinkedList;
 import TDA.Simple.Node;
 
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -25,7 +26,8 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
      */
     public RegistrarTramiteUI() {
         initComponents();
-        //Lista = new ListaTramites(); //CADA VEZ QUE SE ABRE LA VENTANA, REINICIA LA LISTA Y SE PIERDEN LOS TRAMITES REGISTRADOS
+        
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -248,19 +250,44 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         ScreenManager.goBack(this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public static boolean IsDateValid(int dia,int mes,int año){
+    public static boolean IsDateValid(int d, int m, int y){
                     
-        if (dia<1 || mes<1 || dia>31 || mes>12) {
+        if (y < 1 || m < 1 || d > 31 || m >12) {
             return false;
         }        
         
-        int[] diasOfMes = {31,28,31,30,31,30,31,31,30,31,30,31};
+        LinkedList<Integer> diasPorMes = new LinkedList<>();
         
-        if ((año % 4 == 0 && año % 100 != 0) || (año % 400 == 0)) {
-            diasOfMes[1] = 29;
+        diasPorMes.addLast(31); // Enero
+        diasPorMes.addLast(28); // Febrero
+        diasPorMes.addLast(31); // Marzo
+        diasPorMes.addLast(30); // Abril
+        diasPorMes.addLast(31); // Mayo
+        diasPorMes.addLast(30); // Junio
+        diasPorMes.addLast(31); // Julio
+        diasPorMes.addLast(31); // Agosto
+        diasPorMes.addLast(30); // Septiembre
+        diasPorMes.addLast(31); // Octubre
+        diasPorMes.addLast(30); // Noviembre
+        diasPorMes.addLast(31); // Diciembre
+        
+        int maxDia = getValorMes(diasPorMes, m);
+        
+        return d <= maxDia;
+    }
+    
+    private static int getValorMes(LinkedList<Integer> list, int mon) {
+        Node<Integer> ptr = list.L();
+        int count = 1;
+        
+        while (ptr != null) {
+            if (count == mon) {
+                return ptr.item();
+            }
+            ptr = ptr.next();
+            count++;
         }
-                 
-        return dia <= diasOfMes[mes - 1];   
+        return -1; //si es mes invalido
     }
     
     private boolean isUnique(String id) {
@@ -406,6 +433,18 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         jTextField7.setText("");
         jTextField8.setText("");
         jTextField9.setText("");
+        
+        if (ExpedienteManager.expedientesEnProceso().countElements() > 0) {
+            Timer timer = new Timer(30000, new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent ev) {
+                    AlertasUI popUp = new AlertasUI();
+                    popUp.setVisible(true);
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
