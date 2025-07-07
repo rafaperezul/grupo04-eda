@@ -148,20 +148,6 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         
         String idExp = jTextField1.getText();
         
-        /*
-        expediente = ExpedienteManager.buscarPorId(idExp);
-        if (expediente != null) {
-            //Mostrar en la tabla
-            CargarDatosCola(expediente); 
-            ActualizarTabla();
-            
-            System.out.println("Visualizando historial.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro el expediente con ID: " + idExp);
-            System.out.println("No se encontro el expediente con ID: " + idExp);
-        }
-        */
-        
         expediente = ExpedienteManager.buscarPorId(idExp);
         if (expediente != null) {
             cargarHistorial(idExp);
@@ -221,8 +207,8 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
         while (!historial.isEmpty()) {
             Movimiento mov = historial.desencolar();
             
-            Object[] fila = { //netbeans es estrico con la modificacion de tipos de datos de una tabla, asi que usamos un array de Objects
-                idExp,        //(dato que se acepta para cada fila) solo para la impresion.
+            Object[] fila = { //JTable de Java Swing no permite utilizar estructuras de datos personalizadas para el llenado de filas directamente
+                idExp,        //mediante el metodo addRow(). Entonces, solo para el caso de llenado de tablas, se ha realizado de esta forma.
                 expediente.getSubject(),
                 mov.getFromDep().getName(),
                 mov.getToDep().getName(),
@@ -232,49 +218,6 @@ public class VerSeguimientoUI extends javax.swing.JFrame {
             Tabla.addRow(fila);
         }
     }
-    /*
-    public void CargarDatosCola(Expediente exp){
-        
-        //id,asunto,depenorigen,dependestino,fecha
-        if (exp.getDepenPrev()==null) {
-            JOptionPane.showMessageDialog(null, "No se ha hecho ningun cambio de dependencia al tramite");
-            
-            
-        }      
-        if (exp.getDepenPrev()!=null) {
-            cola.encolar(exp.getId());
-            cola.encolar(exp.getSubject());
-            cola.encolar(exp.getDepenPrev().getName());
-            cola.encolar(exp.getDependence().getName());
-            cola.encolar(exp.getChangeDate().toString());    
-        
-        }
-        
-    }
-    */
-
-    /*
-    public void ActualizarTabla(){
-        System.out.println("aaa");
-        if (Tabla.getRowCount()!=0) {
-            this.Tabla.removeRow(0);
-        }
-        System.out.println("bbb");
-        
-        String datos[] = new String[6];
-        //
-        System.out.println("ccc");
-        datos[0]=cola.desencolar();
-        datos[1]=cola.desencolar();
-        datos[2]=cola.desencolar();
-        datos[3]=cola.desencolar();
-        datos[4]=cola.desencolar();
-        Tabla.addRow(datos);
-        
-        System.out.println("ddd");
-    }
-    */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

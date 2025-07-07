@@ -20,12 +20,15 @@ public class AlertasUI extends javax.swing.JFrame {
      * Creates new form AlertasUI
      */
     
+    private DefaultTableModel modelo;
+    private CircularList<Expediente> pendientes;
     
     
     public AlertasUI() {
         initComponents();
         
-        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel();
+        
         modelo.addColumn("ID");
         modelo.addColumn("Asunto");
         modelo.addColumn("Fecha de inicio");
@@ -33,22 +36,9 @@ public class AlertasUI extends javax.swing.JFrame {
         
         jTable1.setModel(modelo);
         
-        CircularList<Expediente> pendientes = ExpedienteManager.expedientesEnProcesoOrdenada();
-        Node<Expediente> ptr = pendientes.getL();
+        pendientes = ExpedienteManager.expedientesEnProcesoOrdenada();
         
-        if (ptr != null) {
-            do { //es lista circular, debe ocurrir al menos una iteración, entonces se usa do while
-                Expediente e = ptr.item();
-                Object[] fila = { //netbeans es estrico con la modificacion de tipos de datos de una tabla, asi que usamos un array de Objects
-                    e.getId(),    //(dato que se acepta para cada fila) solo para la impresion.
-                    e.getSubject(),
-                    e.getStartDate().toString(),
-                    e.getPriority()
-                };
-                modelo.addRow(fila);
-                ptr = ptr.next();
-            } while (ptr != pendientes.getL());
-        }
+        llenarTablaPendientes();
         
         setLocationRelativeTo(null);
     }
@@ -165,6 +155,25 @@ public class AlertasUI extends javax.swing.JFrame {
                 new AlertasUI().setVisible(true);
             }
         });
+    }
+    
+    private void llenarTablaPendientes() {
+        Node<Expediente> ptr = pendientes.getL();
+        if (ptr != null) {
+            do {
+                Expediente e = ptr.item();
+                
+                Object[] fila = { //JTable de Java Swing no permite utilizar estructuras de datos personalizadas para el llenado de filas directamente
+                    e.getId(),    //mediante el metodo addRow(). Entonces, solo para el caso de llenado de tablas, se ha realizado de esta forma.
+                    e.getSubject(),
+                    e.getStartDate(),
+                    e.getPriority()
+                };
+                
+                modelo.addRow(fila);
+                ptr = ptr.next();
+            } while (ptr != pendientes.getL());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

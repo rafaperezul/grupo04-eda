@@ -435,7 +435,7 @@ public class RegistrarTramiteUI extends javax.swing.JFrame {
         jTextField9.setText("");
         
         if (ExpedienteManager.expedientesEnProceso().countElements() > 0) {
-            Timer timer = new Timer(30000, new java.awt.event.ActionListener() {
+            Timer timer = new Timer(60000, new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent ev) {
                     AlertasUI popUp = new AlertasUI();
