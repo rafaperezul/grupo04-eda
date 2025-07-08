@@ -85,7 +85,9 @@ public class ExpedienteManager {
         Node<Expediente> anterior = null;
 
         do {
-            if (comparar(e, actual.item()) < 0) break;
+            if (comparar(e, actual.item()) < 0) {
+                break;
+            }
             anterior = actual;
             actual = actual.next();
         } while (actual != inicio);
